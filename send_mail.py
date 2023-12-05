@@ -15,6 +15,10 @@ from email.message import EmailMessage
 from configparser import ConfigParser
 
 
+USER_EMAIL = os.environ.get('USER_EMAIL')
+PASSWORD = os.environ.get('PASSWORD')
+
+
 def get_config_data():
     """Get the configuration data from environment variables
     """
@@ -39,23 +43,13 @@ def send_mail(message: EmailMessage, mail_from, mail_to, password, attachment=No
     except Exception:
         SystemExit(2)
 
+# Create an instance of EmailMessage()
 
-if __name__ == '__main__':
-    # mail_sender = input('e-mail from: ')
-    # mail_receiver = input('e-mail to: ')
-    # subject = input('e-mail subject: ')
-    # body = input('e-mail body: ')
+msg = EmailMessage()
+msg['From'] = USER_EMAIL
+msg['To'] = 'ciurea.marius1@gmail.com'
+msg['Subject'] = 'test from python'
+msg.set_content('Body: test from my python script')
 
-    email, password = get_config_data()
-
-    # Create an instance of EmailMessage()
-    msg = EmailMessage()
-    msg['From'] = email
-    msg['To'] = 'ciurea.marius1@gmail.com'
-    msg['Subject'] = 'test from python'
-    msg.set_content('Body: test from my python script')
-
-    # Get the password from config.ini file
-
-    # send the e-mail
-    send_mail(msg, email, 'ciurea.marius1@gmail.com', password)
+# send the e-mail
+send_mail(msg, USER_EMAIL, 'ciurea.marius1@gmail.com', PASSWORD)
