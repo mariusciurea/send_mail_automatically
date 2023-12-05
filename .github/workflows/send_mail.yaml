@@ -1,0 +1,12 @@
+name: send_email
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  send_mail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test-send-mail
+        run: echo "test send mail"
